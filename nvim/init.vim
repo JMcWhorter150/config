@@ -97,14 +97,14 @@ function! JournalMode()
 	execute 'normal gg'
 	let filename = '#' . ' ' . expand('%:r')
 	call setline(1, filename)
-	execute 'normal o'
+	execute 'set wrap'
 	execute 'Goyo'
 endfunction
 
 augroup journal
 	autocmd!
 	" populate journal template
-	autocmd VimEnter */journal/** Or ~/.config/nvim/journal.skeleton
+	autocmd VimEnter */journal/** 0r ~/.config/nvim/journal.skeleton
 	" set header for the particular journal
 	autocmd VimEnter */journal/** :call JournalMode()
 
@@ -127,21 +127,21 @@ autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ on
 "                \ ]
 "
 "" Lightline
-"let g:lightline = {
-"      \ 'active': {
-"      \   'left': [ [ 'mode', 'paste' ],
-"      \             [ 'readonly', 'filename', 'modified' ] ],
-"      \   'right': [ [ 'lineinfo' ],
-"      \              [ 'percent' ],
-"      \              [ 'fileencoding', 'filetype' ] ],
-"      \ },
-"      \ 'component_function': {
-"      \   'filename': 'LightlineFilename'
-"      \ },
-"      \ }
-"function! LightlineFilename()
-"  return expand('%:t') !=" '' ? @% : '[No Name]'
-"endfunction
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileencoding', 'filetype' ] ],
+      \ },
+      \ 'component_function': {
+      \   'filename': 'LightlineFilename'
+      \ },
+      \ }
+function! LightlineFilename()
+  return expand('%:t') !=" '' ? @% : '[No Name]'
+endfunction
 
 " from http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
 if executable('ag')
@@ -179,7 +179,15 @@ let g:rustfmt_emit_files = 1
 let g:rustfmt_fail_silently = 0
 let g:rust_clip_command = 'xclip -selection clipboard'
 
-" Completion
+" ALE
+
+let g:ale_linters = {'python': ['flake8']}
+let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['black', 'isort']}
+
+" VIMWIKI
+
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+"Completion
 " Better completion
 " menuone: popup even when there's only one match
 " noinsert: Do not insert text until a selection is made

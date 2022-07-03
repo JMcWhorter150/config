@@ -89,10 +89,10 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='nvim'
 fi
 
-alias journal='nvim $(date -v "%Y-$m-%d").md'
+alias journal='python3 /home/jmcwho/,journal.py'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -109,7 +109,7 @@ alias t="todo.sh"
 alias ta="todo.sh add"
 alias tl="todo.sh ls"
 alias td="todo.sh do"
-PATH=$PATH:"~/todo/"
+PATH=$PATH:"~/todo/":'/home/jmcwho/.local/bin'
 
 alias b="bartib"
 alias bs="bartib start"
@@ -118,9 +118,6 @@ alias bl="bartib list --today"
 export BARTIB_FILE="/Users/josephmcwhorter/todo/activities.bartib"
 
 alias os4="ssh 40.143.89.230 -l joe -p 10422 -i ~/.ssh/os4-20200728.pem"
-
-source "$HOME/.cargo/env"
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 alias yp_scraper='ssh admin@40.143.160.134 -p 250'
 alias agc_portal='ssh admin@40.143.160.135 -p 251'
@@ -138,7 +135,6 @@ alias gpf="git push --force-with-lease"
 
 # Push a new branch:
 alias gpu="git push --set-upstream origin \`git rev-parse --abbrev-ref HEAD\`"
-alias nvim="~/nvim-osx64/bin/nvim"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
